@@ -6,7 +6,6 @@ import {
   method,
   DeployArgs,
   Permissions,
-  PrivateKey,
 } from 'snarkyjs';
 
 /**
@@ -29,10 +28,8 @@ export class Add extends SmartContract {
     });
   }
 
-  @method init(zkappKey: PrivateKey) {
-    super.init(zkappKey);
+  @method init() {
     this.num.set(Field(1));
-    this.requireSignature();
   }
 
   @method update() {
@@ -41,6 +38,5 @@ export class Add extends SmartContract {
     const newState = currentState.add(2);
     newState.assertEquals(currentState.add(2));
     this.num.set(newState);
-    this.requireSignature();
   }
 }
